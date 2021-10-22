@@ -18,7 +18,13 @@ func main() {
 	})
 
 	http.HandleFunc("/test", handleloadJson)
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	http.HandleFunc("/spotify/albums", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "responses/albums.json")
+	})
+	http.HandleFunc("/nba/teams", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "responses/nbateams.json")
+	})
+	log.Fatal(http.ListenAndServe(":8099", nil))
 
 }
 
