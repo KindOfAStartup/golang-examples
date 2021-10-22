@@ -17,6 +17,11 @@ func main() {
 		fmt.Fprintf(w, "Hik")
 	})
 
+	http.HandleFunc("/test", handleloadJson)
 	log.Fatal(http.ListenAndServe(":8081", nil))
 
+}
+
+func handleloadJson(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "responses/test.json")
 }
